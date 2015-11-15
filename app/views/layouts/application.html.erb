@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cobot Slack</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="<%= spaces_path %>">Cobot Slack</a>
+      <ul class="nav">
+        <li class="<%= 'active' if request.path == spaces_path %>"><a href="<%= spaces_path %>">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container main">
+    <% flash.keys.each do |name| %>
+      <% if flash[name].present? %>
+        <p class="flash alert alert-<%= name %>"><%= flash[name] %></p>
+      <% end %>
+    <% end %>
+    <%= yield %>
+  </div>
+</body>
+</html>

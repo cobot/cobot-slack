@@ -1,0 +1,18 @@
+<h1>Cobot Slack Integration</h1>
+
+<p>This software will connect your coworking space on Cobot with your <a href="http://slack.com">Slack.com</a> chat account.</p>
+
+<p>After this, new members on Cobot will automatically be added to your Slack team, so you don't have to add them manually.</p>
+
+<p>Select the space you want to add to Slack:</p>
+
+<table class="table">
+  <tbody>
+    <% @spaces.each do |space| %>
+      <tr>
+        <td><%= link_to space.name, [:new, space, :team] %></td>
+        <td><%= link_to 'Manage existing teams', space, class: 'pull-right btn btn-mini btn-primary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
