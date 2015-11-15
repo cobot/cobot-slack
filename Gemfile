@@ -13,7 +13,7 @@ gem 'omniauth-slack'
 gem 'cobot_client'
 gem 'sentry-raven'
 gem 'lograge'
-gem 'cobot_assets'
+gem 'cobot_assets', path: '../cobot_assets'
 gem 'slack-api', require: 'slack'
 
 group :production do

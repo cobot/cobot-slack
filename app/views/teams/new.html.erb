@@ -1,25 +1,39 @@
-<h1>Connect <%= @space.name %> to Slack</h1>
-
-<%= form_for [@space, @team] do |f| %>
-  <p>
-    <%= f.label :name, 'Name' %>
-    <%= f.text_field :name, required: true %><br>
-  </p>
-  <p>
-    <%= f.label :slack_token, 'Slack Team Token' %>
-    <%= f.text_field :slack_token, required: true %><br>
-    <span class="muted">
-      You can find your token on
-      <a href="http://api.slack.com/web#authentication" target="_blank">api.slack.com/web</a>.
-    </span>
-  </p>
-  <p>
-    <%= f.label :slack_url, 'Slack Team URL' %>
-    <%= f.text_field :slack_url, type: 'url', required: true, placeholder: "http://#{@space.subdomain}.slack.com" %><br>
-  </p>
-  <p>
-    <%= f.check_box :invite_existing_members %>
-    <%= f.label :invite_existing_members, 'Invite existing members' %>
-  </p>
-  <p><%= f.submit value: 'Add Team', class: 'btn btn-primary' %></p>
-<% end %>
+<div class="cb-container">
+  <h1>Connect <%= @space.name %> to Slack</h1>
+</div>
+<div class="cb-section">
+  <div class="cb-container">
+    <div class="grid grid--gutters--huge grid--full tablet-grid--1of2">
+      <div class="grid-cell">
+        <div class="form-block form-block--wide">
+          <%= form_for [@space, @team] do |f| %>
+            <p>
+              <%= f.label :name, 'Name' %>
+              <%= f.text_field :name, required: true, class: 'input--stretch' %><br>
+            </p>
+            <p>
+              <%= f.label :slack_token, 'Slack Team Token' %>
+              <%= f.text_field :slack_token, required: true, class: 'input--stretch' %><br>
+              <span class="muted">
+                You can find your token on
+                <a href="http://api.slack.com/web#authentication" target="_blank">api.slack.com/web</a>.
+              </span>
+            </p>
+            <p>
+              <%= f.label :slack_url, 'Slack Team URL' %>
+              <%= f.text_field :slack_url, type: 'url', required: true,
+                class: 'input--stretch',
+                placeholder: "http://#{@space.subdomain}.slack.com" %><br>
+            </p>
+            <p>
+              <%= f.check_box :invite_existing_members %>
+              <%= f.label :invite_existing_members, 'Invite existing members' %>
+            </p>
+            <p><%= f.submit value: 'Add Team', class: 'btn btn--blue btn--full btn--stretch' %></p>
+          <% end %>
+        </div>
+        <p><%= link_to 'back', :spaces %></p>
+      </div>
+    </div>
+  </div>
+</div>

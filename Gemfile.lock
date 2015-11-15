@@ -1,3 +1,8 @@
+PATH
+  remote: ../cobot_assets
+  specs:
+    cobot_assets (0.0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,7 +54,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    cobot_assets (0.0.7)
     cobot_client (1.2.1)
       json (~> 1.8)
       oauth2 (~> 1.0)
@@ -241,7 +245,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  cobot_assets
+  cobot_assets!
   cobot_client
   dotenv-rails
   jquery-rails

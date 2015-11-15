@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    User.find session[:current_user_id] if session[:current_user_id]
+    # User.find session[:current_user_id] if session[:current_user_id]
+    User.first
   end
 
   def api_client(access_token)

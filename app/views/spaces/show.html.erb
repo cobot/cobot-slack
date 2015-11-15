@@ -1,21 +1,26 @@
-<h1>
-  <%= @space.name %>
-</h1>
+<div class="cb-container">
+  <h1><%= @space.name %></h1>
+</div>
 
-<% if @space.teams.any? %>
-  <table class="table lists">
-    <tbody>
-      <% @space.teams.each do |team| %>
-        <tr>
-          <td><%= team.name %></td>
-          <td><%= link_to 'Remove', [@space, team], method: :delete,
-            class: 'btn btn-danger btn-mini pull-right', data: {confirm: 'Are you sure you want to stop adding Cobot members to this team?'} %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>This space has no Slack teams set up yet.</p>
-<% end %>
+<div class="cb-section">
+  <div class="cb-container">
 
-<p><%= link_to 'Add Team', [:new, @space, :team], class: 'btn btn-primary btn-small' %></p>
+    <% if @space.teams.any? %>
+      <table class="table lists">
+        <tbody>
+          <% @space.teams.each do |team| %>
+            <tr>
+              <td><%= team.name %></td>
+              <td><%= link_to 'Remove', [@space, team], method: :delete,
+                class: 'btn btn-danger btn-mini pull-right', data: {confirm: 'Are you sure you want to stop adding Cobot members to this team?'} %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>This space has no Slack teams set up yet.</p>
+    <% end %>
+    <p><%= link_to 'Add Team', [:new, @space, :team], class: 'btn btn--blue' %></p>
+    <p><%= link_to 'back', :spaces %></p>
+  </div>
+</div>

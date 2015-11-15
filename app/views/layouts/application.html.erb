@@ -7,20 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="<%= spaces_path %>">Cobot Slack</a>
-      <ul class="nav">
-        <li class="<%= 'active' if request.path == spaces_path %>"><a href="<%= spaces_path %>">Home</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="container main">
-    <% flash.keys.each do |name| %>
-      <% if flash[name].present? %>
-        <p class="flash alert alert-<%= name %>"><%= flash[name] %></p>
-      <% end %>
+  <% [:notice, :success, :failure].each do |flash_type| %>
+    <% if flash[flash_type] %>
+      <div id="flash" class="cb-top-notice <%= flash_type %>">
+        <div class="cb-container">
+          <p><%== flash[flash_type] %></p>
+        </div>
+      </div>
     <% end %>
+  <% end %>
+
+  <div class="cb-container">
     <%= yield %>
   </div>
 </body>

@@ -1,0 +1,56 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "cobot_assets/variables/colors";
+@import "cobot_assets/variables/sizes";
+@import "cobot_assets/variables/borders";
+@import "cobot_assets/variables/transitions";
+@import "cobot_assets/variables/breakpoints";
+@import "cobot_assets/base/images";
+@import "cobot_assets/base/mixins";
+@import "cobot_assets/base/reset";
+@import "cobot_assets/base/typography";
+@import "cobot_assets/base/links";
+@import "cobot_assets/base/forms";
+@import "cobot_assets/base/btn";
+@import "cobot_assets/base/lists";
+@import "cobot_assets/base/grid";
+@import "cobot_assets/base/mediaobject";
+@import "cobot_assets/base/helpers";
+@import "cobot_assets/base/tables";
+
+.cb-container {
+  width: 100%;
+  min-width: 320px;
+  max-width: 1120px;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cb-top-notice {
+  background-color: $color-blue-10;
+  @include font--small;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.cb-top-notice.failure,
+.cb-top-notice--error {
+  background-color: $color-red-10;
+  color: $color-red-80;
+}
