@@ -45,9 +45,8 @@ describe 'adding members to slack', type: :request do
   end
 
   it 'returns 410 if the team has been removed on slack' do
-    pending
     stub_request(:post, %r{co-up.slack.com/api/users.admin.invite})
-      .to_return(status: 200, body: {ok: false, error: ''}.to_json)
+      .to_return(status: 200, body: {ok: false, error: 'invalid_auth'}.to_json)
     stub_request(:get, 'https://co-up.cobot.me/api/memberships/456')
       .to_return(body: {email: 'joe@doe.com'}.to_json)
     team = space.teams.create! name: 'team', slack_token: 'sl123', slack_url: 'http://co-up.slack.com'
@@ -56,6 +55,7 @@ describe 'adding members to slack', type: :request do
       url: 'https://co-up.cobot.me/api/memberships/456'
 
     expect(response.status).to eql(410)
+    expect { team.reload}.to raise_error(ActiveRecord::RecordNotFound)
   end
 
   it 'does nothing but returns 200 if the membership has been deleted' do

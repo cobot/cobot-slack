@@ -9,13 +9,15 @@ class MembershipConfirmationsController < ApplicationController
       nil
     end
     if membership && membership[:email].present?
-      # if
-        TeamService.new(@team).invite membership[:email], membership[:name].to_s
+      response = TeamService.new(@team).invite membership[:email], membership[:name].to_s
+      if response[:ok]
         Rails.logger.info "#{@space.subdomain}: subscribed #{membership[:email]} to team."
         head :ok
-      # else
-      #   head 410
-      # end
+      else
+        Rails.logger.info "#{@space.subdomain}: error subscribing #{membership[:email]} to team: #{response}"
+        @team.destroy
+        head 410
+      end
     else
       if membership
         Rails.logger.info "#{@space.subdomain}: skipped  #{membership[:name]}/#{membership[:id]} as it has no email."
