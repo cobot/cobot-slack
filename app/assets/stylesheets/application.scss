@@ -18,4 +18,13 @@
 
 .cb-integration-logo {
   margin-left: 20px;
+  img {
+    width: 170px;
+  }
+}
+
+@include media-query-max($screen-mobile) {
+  .cb-logo img, .cb-integration-logo img {
+    width: 100px;
+  }
 }
