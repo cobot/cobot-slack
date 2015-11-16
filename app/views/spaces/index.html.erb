@@ -14,12 +14,14 @@
     <p>Select the space you want to add to Slack:</p>
 
     <ul>
-        <% @spaces.each do |space| %>
-            <li class="f--clear">
-              <%= link_to 'Manage existing teams', space, class: 'btn btn--blue btn--small f--right' %>
-              <%= link_to space.name, [:new, space, :team] %>
-            </li>
-        <% end %>
+      <% @spaces.each do |space| %>
+        <li>
+          <p class="f--clear">
+            <%= link_to 'Manage existing teams', space, class: 'btn btn--blue btn--small f--right' %>
+            <%= link_to space.name, [:new, space, :team] %>
+          </p>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

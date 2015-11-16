@@ -8,17 +8,18 @@
   <div class="cb-container">
 
     <% if @space.teams.any? %>
-      <table class="table lists">
-        <tbody>
-          <% @space.teams.each do |team| %>
-            <tr>
-              <td><%= team.name %></td>
-              <td><%= link_to 'Remove', [@space, team], method: :delete,
-                class: 'btn btn-danger btn-mini pull-right', data: {confirm: 'Are you sure you want to stop adding Cobot members to this team?'} %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <ul>
+        <% @space.teams.each do |team| %>
+          <li>
+            <p class="f--clear">
+              <%= team.name %>
+              <%= link_to 'Remove', [@space, team], method: :delete,
+                class: 'btn btn-small f--right',
+                  data: {confirm: 'Are you sure you want to stop adding Cobot members to this team?'} %>
+            </p>
+          </li>
+        <% end %>
+      </ul>
     <% else %>
       <p>This space has no Slack teams set up yet.</p>
     <% end %>
