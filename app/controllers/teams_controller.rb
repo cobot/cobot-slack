@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   before_action :load_space
 
   def new
-    @team = @space.teams.build
+    @team = @space.teams.build name: "#{@space.subdomain} members"
   end
 
   def create
