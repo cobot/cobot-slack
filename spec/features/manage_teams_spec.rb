@@ -18,7 +18,7 @@ describe 'managing slack teams' do
       add_team name: 'space members'
 
       expect(page).to have_content('space members')
-      %w(confirmed_membership connected_user changed_membership_plan).each do |event|
+      %w(confirmed_membership connected_user).each do |event|
         expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions').with(
           headers: {'Authorization' => 'Bearer 12345'},
           body: {event: event,

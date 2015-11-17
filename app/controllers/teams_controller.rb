@@ -46,7 +46,7 @@ class TeamsController < ApplicationController
   end
 
   def set_up_webhooks(team)
-    %w(confirmed_membership connected_user changed_membership_plan).each do |event|
+    %w(confirmed_membership connected_user).each do |event|
       api_client(current_user.access_token(@space)).post @space.subdomain,
         '/subscriptions', event: event,
         callback_url: space_team_membership_confirmation_url(@space, team)
