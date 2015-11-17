@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'managing slack teams' do
-  context 'when adding a ream' do
+  context 'when adding a team' do
     before(:each) do
       stub_request(:post, 'https://co-up.cobot.me/api/subscriptions')
         .to_return(body: '{}')

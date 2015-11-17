@@ -6,6 +6,7 @@ module LoginHelpers
     ]
     OmniAuth.config.mock_auth[:cobot]['credentials']['token'] = access_token
     visit root_path
+    click_on 'Get Started now'
     Space.where(subdomain: subdomain).first
   end
 end

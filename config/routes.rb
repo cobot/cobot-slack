@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root 'sessions#new'
+  root 'welcome#show'
 
+  get 'sign_in', to: 'sessions#new', as: :sign_in
   get '/auth/:provider/callback', to: 'sessions#create', as: :authenticate
   get '/auth/failure', to: 'sessions#failure'
 
