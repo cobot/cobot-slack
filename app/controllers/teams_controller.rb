@@ -36,13 +36,7 @@ class TeamsController < ApplicationController
   end
 
   def add_existing_members(team)
-    memberships = api_client(@space.admins.first.access_token)
-      .get("https://#{@space.subdomain}.cobot.me/api/memberships?attributes=name,email")
-    memberships.each do |membership|
-      if membership[:email].present?
-        TeamService.new(team).invite(membership[:email], membership[:name].to_s)
-      end
-    end
+    BulkInviteWorker.perform_async @space.id, team.id
   end
 
   def set_up_webhooks(team)

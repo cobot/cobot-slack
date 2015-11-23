@@ -15,6 +15,7 @@ gem 'sentry-raven'
 gem 'lograge'
 gem 'cobot_assets', '~> 0.0.9'
 gem 'slack-api', require: 'slack'
+gem 'sidekiq'
 
 group :production do
   gem 'puma'
