@@ -76,7 +76,7 @@ describe 'managing slack teams' do
     click_link 'co.up'
     fill_in 'Name', with: name
     fill_in 'Slack Team Token', with: token
-    fill_in 'Slack Team URL', with: 'http://co-up.slack.com'
+    fill_in 'Slack Team URL', with: 'co-up'
     check 'Invite existing members' if add_existing_members
     click_button 'Add Team'
   end

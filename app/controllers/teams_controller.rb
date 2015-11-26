@@ -32,7 +32,8 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params[:team].permit(:slack_token, :slack_url, :name, :invite_existing_members)
+    params[:team].permit(:slack_token, :name, :invite_existing_members)
+      .merge(slack_url: ("https://#{params[:team][:slack_url]}.slack.com" if params[:team][:slack_url].present?))
   end
 
   def add_existing_members(team)

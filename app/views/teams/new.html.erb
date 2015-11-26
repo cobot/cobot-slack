@@ -24,10 +24,10 @@
               </span>
             </p>
             <p>
-              <%= f.label :slack_url, 'Slack Team URL' %>
-              <%= f.text_field :slack_url, type: 'url', required: true,
-                class: 'input--stretch',
-                placeholder: "http://#{@space.subdomain}.slack.com" %><br>
+              <%= f.label :slack_url, 'Slack Team URL' %><br>
+              http://<%= f.text_field :slack_url, type: 'text', required: true, pattern: '[a-z0-9-]+',
+                class: '',
+                placeholder: @space.subdomain %>.slack.com<br>
             </p>
             <p>
               <%= f.check_box :invite_existing_members %>
