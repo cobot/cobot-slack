@@ -10,14 +10,7 @@ class MembershipConfirmationsController < ApplicationController
     end
     if membership && membership[:email].present?
       response = TeamService.new(@team).invite membership[:email], membership[:name].to_s
-      if response[:ok]
-        Rails.logger.info "#{@space.subdomain}: subscribed #{membership[:email]} to team."
-        head :ok
-      else
-        Rails.logger.info "#{@space.subdomain}: error subscribing #{membership[:email]} to team: #{response}"
-        @team.destroy
-        head 410
-      end
+      handle_slack_response response, membership
     else
       if membership
         Rails.logger.info "#{@space.subdomain}: skipped  #{membership[:name]}/#{membership[:id]} as it has no email."
@@ -31,6 +24,21 @@ class MembershipConfirmationsController < ApplicationController
   end
 
   private
+
+  def handle_slack_response(response, membership)
+    if response[:ok]
+      Rails.logger.info "#{@space.subdomain}: subscribed #{membership[:email]} to team."
+      head :ok
+    else
+      Rails.logger.info "#{@space.subdomain}: error subscribing #{membership[:email]} to team: #{response}"
+      if response[:error] == 'invalid_auth'
+        @team.destroy
+        head 410
+      else
+        head :ok
+      end
+    end
+  end
 
   def load_space
     @space = Space.find params[:space_id]

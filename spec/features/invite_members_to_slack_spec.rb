@@ -58,6 +58,20 @@ describe 'adding members to slack', type: :request do
     expect { team.reload}.to raise_error(ActiveRecord::RecordNotFound)
   end
 
+  it 'returns 200 even if the user could not be added to slack' do
+    stub_request(:post, %r{co-up.slack.com/api/users.admin.invite})
+      .to_return(status: 200, body: {ok: false, error: 'xyz'}.to_json)
+    stub_request(:get, 'https://co-up.cobot.me/api/memberships/456')
+      .to_return(body: {email: 'joe@doe.com'}.to_json)
+    team = space.teams.create! name: 'team', slack_token: 'sl123', slack_url: 'http://co-up.slack.com'
+
+    post space_team_membership_confirmation_url(space, team),
+      url: 'https://co-up.cobot.me/api/memberships/456'
+
+    expect(response.status).to eql(200)
+    expect { team.reload}.to_not raise_error
+  end
+
   it 'does nothing but returns 200 if the membership has been deleted' do
     stub_request(:get, 'https://co-up.cobot.me/api/memberships/456')
       .to_return(status: 404)
