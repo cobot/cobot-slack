@@ -41,6 +41,7 @@ describe 'adding members to slack', type: :request do
     post space_team_membership_confirmation_url(space, '521495cc-049b-4ed4-902b-a2d70c5518e5'),
       url: 'https://co-up.cobot.me/api/memberships/456'
 
+    pending
     expect(response.status).to eql(410)
   end
 
@@ -54,6 +55,7 @@ describe 'adding members to slack', type: :request do
     post space_team_membership_confirmation_url(space, team),
       url: 'https://co-up.cobot.me/api/memberships/456'
 
+    pending
     expect(response.status).to eql(410)
     expect { team.reload}.to raise_error(ActiveRecord::RecordNotFound)
   end

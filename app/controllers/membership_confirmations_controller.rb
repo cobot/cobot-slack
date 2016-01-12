@@ -32,8 +32,10 @@ class MembershipConfirmationsController < ApplicationController
     else
       Rails.logger.info "#{@space.subdomain}: error subscribing #{membership[:email]} to team: #{response}"
       if response[:error] == 'invalid_auth'
-        @team.destroy
-        head 410
+        Rails.logger.info "#{@space.subdomain}: got invalid_auth, would delete team now."
+        head :ok
+        # @team.destroy
+        # head 410
       else
         head :ok
       end
@@ -45,6 +47,6 @@ class MembershipConfirmationsController < ApplicationController
   end
 
   def load_team
-    @team = @space.teams.where(id: params[:team_id]).first || head(410)
+    @team = @space.teams.where(id: params[:team_id]).first || (Rails.logger.info "team #{params[:team_id]} not found for space #{@space.id}/#{@space.subdomain}"; head(:ok)) # head(410)
   end
 end
