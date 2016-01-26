@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cobot/cobot-slack.svg?branch=master)](https://travis-ci.org/cobot/cobot-slack)
+
 This app automatically invites members of a space on Cobot to a Slack.com team. To see it in action, go to http://slack.apps.cobot.me.
 
 ## About
