@@ -10,7 +10,7 @@ class MembershipConfirmationsController < ApplicationController
     end
     if membership && membership[:email].present?
       response = TeamService.new(@team).invite membership[:email], membership[:name].to_s
-      handle_slack_response response, membership
+      handle_slack_response response
     else
       if membership
         Rails.logger.info "#{@space.subdomain}: skipped  #{membership[:name]}/#{membership[:id]} as it has no email."
@@ -25,14 +25,11 @@ class MembershipConfirmationsController < ApplicationController
 
   private
 
-  def handle_slack_response(response, membership)
+  def handle_slack_response(response)
     if response[:ok]
-      Rails.logger.info "#{@space.subdomain}: subscribed #{membership[:email]} to team."
       head :ok
     else
-      Rails.logger.info "#{@space.subdomain}: error subscribing #{membership[:email]} to team: #{response}"
       if response[:error] == 'invalid_auth'
-        Rails.logger.info "#{@space.subdomain}: got invalid_auth, would delete team now."
         head :ok
         # @team.destroy
         # head 410

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :spaces, only: [:index, :show] do
     resources :teams, only: [:new, :create, :destroy] do
       resource :membership_confirmation, only: :create
+      resource :membership_cancelation, only: :create
     end
   end
 end

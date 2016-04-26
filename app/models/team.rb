@@ -5,5 +5,5 @@ class Team < ActiveRecord::Base
   validates :slack_token, presence: true
   validates :slack_url, presence: true
 
-  attr_accessor :invite_existing_members
+  attr_accessor :invite_existing_members, :remove_canceled_members
 end

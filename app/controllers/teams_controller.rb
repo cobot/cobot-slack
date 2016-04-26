@@ -32,7 +32,8 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params[:team].permit(:slack_token, :name, :invite_existing_members)
+    params[:team]
+      .permit(:slack_token, :name, :invite_existing_members, :remove_canceled_members)
       .merge(slack_url: ("https://#{params[:team][:slack_url]}.slack.com" if params[:team][:slack_url].present?))
   end
 
@@ -46,6 +47,10 @@ class TeamsController < ApplicationController
         '/subscriptions', event: event,
         callback_url: space_team_membership_confirmation_url(@space, team)
     end
+    return unless team.remove_canceled_members == '1'
+    api_client(current_user.access_token(@space)).post @space.subdomain,
+      '/subscriptions', event: 'canceled_membership',
+      callback_url: space_team_membership_cancelation_url(@space, team)
   end
 
   def load_space

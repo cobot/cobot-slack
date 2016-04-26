@@ -15,7 +15,7 @@ describe 'managing slack teams' do
     end
 
     it 'sets up a space for slack integration' do
-      add_team name: 'space members'
+      add_team name: 'space members', remove_canceled_members: true
 
       expect(page).to have_content('space members')
       %w(confirmed_membership connected_user).each do |event|
@@ -25,6 +25,11 @@ describe 'managing slack teams' do
             callback_url: space_team_membership_confirmation_url(@space, Team.last)}.to_json
         )).to have_been_made
       end
+      expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions').with(
+        headers: {'Authorization' => 'Bearer 12345'},
+        body: {event: 'canceled_membership',
+          callback_url: space_team_membership_cancelation_url(@space, Team.last)}.to_json
+      )).to have_been_made
     end
 
     it "renders an error if we can't connect to the slack api" do
@@ -55,8 +60,8 @@ describe 'managing slack teams' do
       add_team add_existing_members: true, token: 'slack-123'
 
       expect(a_request(:post, 'https://co-up.slack.com/api/users.admin.invite').with(
-        body: {token: 'slack-123', email: 'joe@doe.com',
-          first_name: 'joe', set_active: 'true'})
+        body: hash_including(token: 'slack-123', email: 'joe@doe.com',
+          first_name: 'joe'))
       ).to have_been_made
     end
   end
@@ -72,12 +77,13 @@ describe 'managing slack teams' do
     expect(page).to have_no_css('.teams', text: 'test list')
   end
 
-  def add_team(name: 'team', token: 't123', add_existing_members: false)
+  def add_team(name: 'team', token: 't123', add_existing_members: false, remove_canceled_members: false)
     click_link 'co.up'
     fill_in 'Name', with: name
     fill_in 'Slack Team Token', with: token
     fill_in 'Slack Team URL', with: 'co-up'
     check 'Invite existing members' if add_existing_members
+    check 'Remove canceled members' if remove_canceled_members
     click_button 'Add Team'
   end
 end

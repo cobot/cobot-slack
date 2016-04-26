@@ -33,6 +33,10 @@
               <%= f.check_box :invite_existing_members %>
               <%= f.label :invite_existing_members, 'Invite existing members' %>
             </p>
+            <p>
+              <%= f.check_box :remove_canceled_members %>
+              <%= f.label :remove_canceled_members, 'Remove canceled members (only works with a paid Slack account)' %>
+            </p>
             <p><%= f.submit value: 'Add Team', class: 'btn btn--blue btn--full btn--stretch' %></p>
           <% end %>
         </div>

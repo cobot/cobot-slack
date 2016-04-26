@@ -9,8 +9,25 @@ class TeamService
   end
 
   def invite(email, name)
-    slack_client.admin_invite(email: email, first_name: name.scan(/^\S+/).first,
-      set_active: true).symbolize_keys
+    response = slack_client.admin_invite(email: email, first_name: name.scan(/^\S+/).first).symbolize_keys
+    if response[:ok]
+      Rails.logger.info "#{@team.space.subdomain}: invited user #{email}/#{name}"
+    else
+      Rails.logger.info "#{@team.space.subdomain}: error inviting #{email}/#{name} to team: #{response}"
+    end
+    response
+  end
+
+  def deactivate(email, name)
+    user = slack_client.users_list['members'].find do |u|
+      u['profile']['email'] == email || u['profile']['real_name'] == name
+    end
+    if user
+      response = slack_client.admin_set_inactive(user: user['id'])
+      Rails.logger.info "#{@team.space.subdomain}: deactivated user #{email}/#{name}: #{response}"
+    else
+      Rails.logger.info "#{@team.space.subdomain}: cannot deactivate user #{email}/#{name} - not found"
+    end
   end
 
   private
