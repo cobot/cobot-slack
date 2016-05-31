@@ -9,7 +9,7 @@ class TeamService
   end
 
   def invite(email, name)
-    response = slack_client.admin_invite(email: email, first_name: name.scan(/^\S+/).first).symbolize_keys
+    response = slack_client.admin_invite(email: email, first_name: name.to_s.scan(/^\S+/).first).symbolize_keys
     if response[:ok]
       Rails.logger.info "#{@team.space.subdomain}: invited user #{email}/#{name}"
     else

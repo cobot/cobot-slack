@@ -9,35 +9,20 @@ class MembershipConfirmationsController < ApplicationController
       nil
     end
     if membership && membership[:email].present?
-      response = TeamService.new(@team).invite membership[:email], membership[:name].to_s
-      handle_slack_response response
+      MembershipInviteWorker.perform_async(@team.id, membership)
     else
       if membership
         Rails.logger.info "#{@space.subdomain}: skipped  #{membership[:name]}/#{membership[:id]} as it has no email."
       else
         Rails.logger.info "#{@space.subdomain}: skipped #{params[:url]} as it was deleted."
       end
-      head :ok
     end
+    head :ok
   rescue RestClient::Forbidden => e
     render json: {error: "Received 403 from Cobot (#{e.response})"}, status: 403
   end
 
   private
-
-  def handle_slack_response(response)
-    if response[:ok]
-      head :ok
-    else
-      if response[:error] == 'invalid_auth'
-        head :ok
-        # @team.destroy
-        # head 410
-      else
-        head :ok
-      end
-    end
-  end
 
   def load_space
     @space = Space.find params[:space_id]
