@@ -26,9 +26,11 @@ class SessionsController < ApplicationController
   def create_spaces(user)
     auth.extra.raw_info.admin_of.each do |admin|
       space = Space.where(subdomain: admin.space_subdomain).first ||
-              Space.create!(subdomain: admin.space_subdomain)
-      user.admins.create access_token: space_access_token(auth.credentials.token, admin.space_subdomain), space: space
-      space.update name: admin.space_name
+              Space.create!(subdomain: admin.space_subdomain,
+                name: admin.space_name,
+                access_token: space_access_token(
+                  auth.credentials.token, admin.space_subdomain))
+      user.admins.create space: space
     end
   end
 

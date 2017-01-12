@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe 'adding members to slack', type: :request do
-  let(:space) { Space.create! name: 'co.up', subdomain: 'co-up' }
-  let!(:admin) { space.admins.create! access_token: '123' }
+  let(:space) { Space.create! name: 'co.up', subdomain: 'co-up', access_token: '123' }
   let(:team) { space.teams.create! name: 'team', slack_token: 'sl123', slack_url: 'http://co-up.slack.com' }
 
   before(:each) do

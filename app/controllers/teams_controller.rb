@@ -43,12 +43,12 @@ class TeamsController < ApplicationController
 
   def set_up_webhooks(team)
     %w(confirmed_membership connected_user).each do |event|
-      api_client(current_user.access_token(@space)).post @space.subdomain,
+      api_client(@space.access_token).post @space.subdomain,
         '/subscriptions', event: event,
         callback_url: space_team_membership_confirmation_url(@space, team)
     end
     return unless team.remove_canceled_members == '1'
-    api_client(current_user.access_token(@space)).post @space.subdomain,
+    api_client(@space.access_token).post @space.subdomain,
       '/subscriptions', event: 'canceled_membership',
       callback_url: space_team_membership_cancelation_url(@space, team)
   end

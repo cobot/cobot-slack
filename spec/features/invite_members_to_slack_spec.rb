@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe 'adding members to slack', type: :request do
-  let(:space) { Space.create! name: 'co.up', subdomain: 'co-up' }
-  let!(:admin) { space.admins.create! access_token: '123' }
+  let(:space) { Space.create! name: 'co.up', subdomain: 'co-up', access_token: '123' }
 
   it 'adds a confirmed member' do
     stub_request(:post, %r{co-up.slack.com/api/users.admin.invite})

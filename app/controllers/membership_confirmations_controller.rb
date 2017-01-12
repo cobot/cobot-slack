@@ -4,7 +4,7 @@ class MembershipConfirmationsController < ApplicationController
 
   def create
     membership = begin
-      api_client(@space.admins.first.access_token).get(params[:url])
+      api_client(@space.access_token).get(params[:url])
     rescue RestClient::ResourceNotFound
       nil
     end
