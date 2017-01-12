@@ -26,14 +26,15 @@ class SessionsController < ApplicationController
   def create_spaces(user)
     auth.extra.raw_info.admin_of.each do |admin|
       space = Space.where(subdomain: admin.space_subdomain).first ||
-        Space.create!(subdomain: admin.space_subdomain)
-      user.admins.create access_token: space_access_token(auth.credentials.token), space: space
+              Space.create!(subdomain: admin.space_subdomain)
+      user.admins.create access_token: space_access_token(auth.credentials.token, admin.space_subdomain), space: space
       space.update name: admin.space_name
     end
   end
 
-  def space_access_token(access_token)
-    CobotClient::ApiClient.new(access_token).post('www', "access_token/#{access_token}/space")[:token]
+  def space_access_token(access_token, space_subdomain)
+    space_id = CobotClient::ApiClient.new(nil).get('www', "/spaces/#{space_subdomain}")[:id]
+    CobotClient::ApiClient.new(access_token).post('www', "/access_tokens/#{access_token}/space", space_id: space_id)[:token]
   end
 
   def auth
