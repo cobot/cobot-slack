@@ -19,17 +19,19 @@ describe 'managing slack teams' do
 
       expect(page).to have_content('space members')
       %w(confirmed_membership connected_user).each do |event|
-        expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions').with(
-          headers: {'Authorization' => 'Bearer 12345'},
-          body: {event: event,
-            callback_url: space_team_membership_confirmation_url(@space, Team.last)}.to_json
-        )).to have_been_made
+        expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions')
+          .with(
+            headers: {'Authorization' => 'Bearer space-token-12345'},
+            body: {event: event,
+              callback_url: space_team_membership_confirmation_url(@space, Team.last)}.to_json))
+          .to have_been_made
       end
-      expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions').with(
-        headers: {'Authorization' => 'Bearer 12345'},
-        body: {event: 'canceled_membership',
-          callback_url: space_team_membership_cancelation_url(@space, Team.last)}.to_json
-      )).to have_been_made
+      expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions')
+        .with(
+          headers: {'Authorization' => 'Bearer space-token-12345'},
+          body: {event: 'canceled_membership',
+            callback_url: space_team_membership_cancelation_url(@space, Team.last)}.to_json))
+        .to have_been_made
     end
 
     it "renders an error if we can't connect to the slack api" do
@@ -54,15 +56,14 @@ describe 'managing slack teams' do
 
     it 'invites existing members' do
       stub_request(:get, 'https://co-up.cobot.me/api/memberships?attributes=name,email')
-        .with(headers: {'Authorization' => 'Bearer 12345'})
+        .with(headers: {'Authorization' => 'Bearer space-token-12345'})
         .to_return(body: [{name: 'joe doe', email: 'joe@doe.com'}].to_json)
 
       add_team add_existing_members: true, token: 'slack-123'
 
-      expect(a_request(:post, 'https://co-up.slack.com/api/users.admin.invite').with(
-        body: hash_including(token: 'slack-123', email: 'joe@doe.com',
-          first_name: 'joe'))
-      ).to have_been_made
+      expect(a_request(:post, 'https://co-up.slack.com/api/users.admin.invite')
+        .with(body: hash_including(token: 'slack-123', email: 'joe@doe.com', first_name: 'joe')))
+        .to have_been_made
     end
   end
 
