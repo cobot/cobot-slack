@@ -27,6 +27,6 @@ class MembershipCancelationsController < ApplicationController
   end
 
   def load_team
-    @team = @space.teams.where(id: params[:team_id]).first || (Rails.logger.info "team #{params[:team_id]} not found for space #{@space.id}/#{@space.subdomain}"; head(:ok)) # head(410)
+    @team = @space.teams.where(id: params[:team_id]).first || (Rails.logger.info "team #{params[:team_id]} not found for space #{@space.id}/#{@space.subdomain}"; head(410))
   end
 end
