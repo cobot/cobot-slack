@@ -3,12 +3,12 @@ require 'rails_helper'
 describe 'adding members to slack', type: :request do
   let(:space) { Space.create! name: 'co.up', subdomain: 'co-up', access_token: '123' }
 
-  it 'adds a confirmed member' do
+  it 'adds a confirmed member that is connected to a user' do
     stub_request(:post, %r{co-up.slack.com/api/users.admin.invite})
       .to_return(body: {ok: true}.to_json)
     stub_request(:get, 'https://co-up.cobot.me/api/memberships/456')
       .with(headers: {'Authorization' => 'Bearer 123'})
-      .to_return(body: {name: 'joe doe', email: 'joe@doe.com'}.to_json)
+      .to_return(body: {name: 'joe doe', email: 'joe@doe.com', user: {id: '1'}}.to_json)
     team = space.teams.create! name: 'team', slack_token: 'sl123', slack_url: 'http://co-up.slack.com'
 
     post space_team_membership_confirmation_url(space, team),

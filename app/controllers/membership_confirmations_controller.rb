@@ -8,7 +8,7 @@ class MembershipConfirmationsController < ApplicationController
     rescue RestClient::ResourceNotFound
       nil
     end
-    if membership && membership[:email].present?
+    if membership && membership[:user].present?
       MembershipInviteWorker.perform_async(@team.id, membership)
     else
       if membership
