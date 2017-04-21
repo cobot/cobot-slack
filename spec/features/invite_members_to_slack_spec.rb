@@ -4,11 +4,17 @@ describe 'adding members to slack', type: :request do
   let(:space) { Space.create! name: 'co.up', subdomain: 'co-up', access_token: '123' }
 
   it 'adds a confirmed member that is connected to a user' do
+    stub_request(:get, 'http://co-up.slack.com/oauth')
+      .with(headers: {'response_type' => 'code',
+            'client_id' => '1234.567',
+            'scope' => 'admin',
+            'redirect_uri' => 'https://www.cobot.me/oauth/authorize'})
+      .to_return(body: {ok: true, token: '987654321', scope: 'admin', redirect_uri: 'https://www.cobot.me/oauth/authorize'}.to_json)
     stub_request(:post, %r{co-up.slack.com/api/users.admin.invite})
       .to_return(body: {ok: true}.to_json)
-    stub_request(:get, 'https://co-up.cobot.me/api/memberships/456')
-      .with(headers: {'Authorization' => 'Bearer 123'})
-      .to_return(body: {name: 'joe doe', email: 'joe@doe.com', user: {id: '1'}}.to_json)
+    stub_request(:get, "https://co-up.cobot.me/api/memberships/456")
+      .with(:headers => {'Authorization'=>'Bearer 123'})
+      .to_return(:body => {name: 'joe doe', email: 'joe@doe.com', user: {id: '1'}}.to_json)
     team = space.teams.create! name: 'team', slack_token: 'sl123', slack_url: 'http://co-up.slack.com'
 
     post space_team_membership_confirmation_url(space, team),
