@@ -15,15 +15,14 @@ describe 'adding members to slack', type: :request do
       url: 'https://co-up.cobot.me/api/memberships/456'
     expect(response.status).to eql(200)
 
-    expect(a_request(:post, 'https://co-up.slack.com/api/users.admin.invite').with(
-      body: hash_including(token: 'sl123', email: 'joe@doe.com',
-        first_name: 'joe'))
-    ).to have_been_made
+    expect(a_request(:post, 'https://co-up.slack.com/api/users.admin.invite')
+      .with(body: hash_including(token: 'sl123', email: 'joe@doe.com', first_name: 'joe')))
+      .to have_been_made
   end
 
-  it 'does not add members with no email' do
+  it 'does not add members with no user (we do not sync members that are only managed by admins)' do
     stub_request(:get, 'https://co-up.cobot.me/api/memberships/456')
-      .to_return(body: {email: ''}.to_json)
+      .to_return(body: {email: 'joe@doe.com'}.to_json)
 
     team = space.teams.create! name: 'team', slack_token: 'sl123', slack_url: 'http://co-up.slack.com'
 
