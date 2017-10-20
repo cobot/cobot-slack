@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe 'managing slack teams' do
+  let!(:activity_request) do
+    stub_request(:post, 'https://co-up.cobot.me/api/activities')
+      .to_return(body: '{}')
+  end
+  
   context 'when adding a team' do
     before(:each) do
       stub_request(:post, 'https://co-up.cobot.me/api/subscriptions')

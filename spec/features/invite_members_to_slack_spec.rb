@@ -2,6 +2,11 @@ require 'rails_helper'
 
 describe 'adding members to slack', type: :request do
   let(:space) { Space.create! name: 'co.up', subdomain: 'co-up', access_token: '123' }
+  let!(:activity_request) do
+    stub_request(:post, 'https://co-up.cobot.me/api/activities')
+      .with(body: {text: 'Invited joe doe (joe@doe.com) to join Slack.'})
+      .to_return(body: '{}')
+  end
 
   it 'adds a confirmed member that is connected to a user' do
     stub_request(:post, %r{co-up.slack.com/api/users.admin.invite})
@@ -18,6 +23,7 @@ describe 'adding members to slack', type: :request do
     expect(a_request(:post, 'https://co-up.slack.com/api/users.admin.invite')
       .with(body: hash_including(token: 'sl123', email: 'joe@doe.com', first_name: 'joe')))
       .to have_been_made
+    expect(activity_request).to have_been_made
   end
 
   it 'does not add members with no user (we do not sync members that are only managed by admins)' do
