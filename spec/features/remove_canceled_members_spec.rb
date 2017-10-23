@@ -3,8 +3,9 @@ require 'rails_helper'
 describe 'adding members to slack', type: :request do
   let(:space) { Space.create! name: 'co.up', subdomain: 'co-up', access_token: '123' }
   let(:team) { space.teams.create! name: 'team', slack_token: 'sl123', slack_url: 'http://co-up.slack.com' }
-
-  before(:each) do
+  let!(:activity_request) do
+    stub_request(:post, 'https://co-up.cobot.me/api/activities')
+      .to_return(body: '{}')
   end
 
   it 'removes a canceled member' do
