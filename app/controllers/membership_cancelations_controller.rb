@@ -10,9 +10,10 @@ class MembershipCancelationsController < ApplicationController
     end
     if membership
       if membership[:canceled_to]
-        MembershipCancelationWorker.perform_at Time.parse(membership[:canceled_to]), @team.id, membership
+        MembershipCancelationWorker.perform_at Time.parse(membership[:canceled_to]),
+          @team.id, membership[:email], membership[:name]
       else
-        MembershipInviteWorker.perform_async @team.id, membership
+        MembershipInviteWorker.perform_async @team.id, membership[:email], membership[:name]
       end
     else
       Rails.logger.info "#{@space.subdomain}: skipped removing member #{params[:url]} - deleted."
