@@ -12,6 +12,7 @@ This is a Ruby on Rails app that provides the following:
   * set up webhooks on Cobot (`TeamsController#set_up_webhooks`) for new members
   * listen to webhooks (`app/controllers/membership_confirmations_controller.rb#create`)
   * call Slack API to send invites (`app/services/team_service.rb`)
+* Workers are run by Sidekiq. WebUI is available under /sidekiq. Login details set in ENV
 
 ## Setup
 
