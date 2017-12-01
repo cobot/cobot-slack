@@ -16,7 +16,7 @@ class TeamService
     else
       ActivityWorker.perform_async @team.space_id,
         I18n.t('team_service.invite_failed', name: name, email: email, error: response[:error].to_s.gsub('_', ' ')),
-        level: 'WARN'
+        'WARN'
       Rails.logger.info "#{@team.space.subdomain}: error inviting #{email}/#{name} to team: #{response}"
     end
     response

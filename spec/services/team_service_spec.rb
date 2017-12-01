@@ -21,7 +21,7 @@ RSpec.describe TeamService, '#invite' do
 
     expect(ActivityWorker)
       .to receive(:perform_async)
-      .with('space-1', 'Error inviting joe (joe@doe.com) to join Slack: already invited.', level: 'WARN')
+      .with('space-1', 'Error inviting joe (joe@doe.com) to join Slack: already invited.', 'WARN')
 
     TeamService.new(team).invite('joe@doe.com', 'joe')
   end
