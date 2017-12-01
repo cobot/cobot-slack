@@ -22,3 +22,4 @@
 en:
   team_service:
     invited: "Invited %{name} (%{email}) to join Slack."
+    invite_failed: "Error inviting %{name} (%{email}) to join Slack: %{error}."
