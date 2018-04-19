@@ -9,10 +9,10 @@ class MembershipConfirmationsController < ApplicationController
       nil
     end
     if membership && membership[:user].present?
-      MembershipInviteWorker.perform_async(@team.id, membership[:email], membership[:name])
+      MembershipInviteWorker.perform_async(@team.id, membership)
     else
       if membership
-        Rails.logger.info "#{@space.subdomain}: skipped  #{membership[:name]}/#{membership[:id]} as it has no email."
+        Rails.logger.info "#{@space.subdomain}: skipped #{membership[:id]} as it has no email."
       else
         Rails.logger.info "#{@space.subdomain}: skipped #{params[:url]} as it was deleted."
       end
