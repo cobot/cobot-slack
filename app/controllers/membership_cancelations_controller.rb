@@ -11,9 +11,9 @@ class MembershipCancelationsController < ApplicationController
     if membership
       if membership[:canceled_to]
         MembershipCancelationWorker.perform_at Time.parse(membership[:canceled_to]),
-          @team.id, membership[:email], membership[:name]
+          @team.id, membership
       else
-        MembershipInviteWorker.perform_async @team.id, membership[:email], membership[:name]
+        MembershipInviteWorker.perform_async @team.id, membership
       end
     else
       Rails.logger.info "#{@space.subdomain}: skipped removing member #{params[:url]} - deleted."
@@ -28,6 +28,6 @@ class MembershipCancelationsController < ApplicationController
   end
 
   def load_team
-    @team = @space.teams.where(id: params[:team_id]).first || (Rails.logger.info "team #{params[:team_id]} not found for space #{@space.id}/#{@space.subdomain}"; head(410))
+    @team = @space.teams.where(id: params[:team_id]).first || (Rails.logger.info "team #{params[:team_id]} not found for space #{@space.id}"; head(410))
   end
 end
