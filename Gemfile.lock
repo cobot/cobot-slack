@@ -112,7 +112,7 @@ GEM
     mime-types (2.99.3)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
-    multi_json (1.12.1)
+    multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     netrc (0.11.0)
@@ -137,7 +137,7 @@ GEM
     pg (0.20.0)
     public_suffix (2.0.5)
     puma (3.8.2)
-    rack (1.6.9)
+    rack (1.6.10)
     rack-protection (2.0.1)
       rack
     rack-test (0.6.3)
@@ -213,7 +213,7 @@ GEM
       faraday_middleware (~> 0.10.0)
       faye-websocket (~> 0.10.6)
       multi_json (~> 1.0, >= 1.0.3)
-    sprockets (2.12.4)
+    sprockets (2.12.5)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -276,4 +276,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.14.6
+   1.16.0
