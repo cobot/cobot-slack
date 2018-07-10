@@ -13,5 +13,8 @@ RSpec.configure do |c|
         }
       }
     )
+    OmniAuth.config.mock_auth[:slack] = OmniAuth::AuthHash.new(
+    #{?}
+    )
   end
 end
