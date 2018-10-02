@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
         set_up_webhooks(@team)
         add_existing_members(@team) if @team.invite_existing_members == '1'
         redirect_to @space, flash: {success: "#{@space.name} connected to team #{@team.name}."}
-      rescue CobotClient::ResourceNotFound
+      rescue CobotClient::NotFound
         @space.destroy
         redirect_to spaces_path, flash: {failure: "Sorry, the space #{@space.name} has been deleted on Cobot."}
       end
