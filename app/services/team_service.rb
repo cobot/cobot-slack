@@ -12,12 +12,11 @@ class TeamService
     response = slack_client.admin_invite(email: email, first_name: name.to_s.scan(/^\S+/).first).symbolize_keys
     if response[:ok]
       ActivityWorker.perform_async @team.space_id, I18n.t('team_service.invited', name: name, email: email)
-      Rails.logger.info "#{@team.space.subdomain}: invited user #{email}/#{name}"
     else
       ActivityWorker.perform_async @team.space_id,
         I18n.t('team_service.invite_failed', name: name, email: email, error: response[:error].to_s.gsub('_', ' ')),
         'WARN'
-      Rails.logger.info "#{@team.space.subdomain}: error inviting #{email}/#{name} to team: #{response}"
+      Rails.logger.info "#{@team.space.subdomain}: error inviting a member to team: #{response}"
     end
     response
   end
@@ -28,9 +27,9 @@ class TeamService
     end
     if user
       response = slack_client.admin_set_inactive(user: user['id'])
-      Rails.logger.info "#{@team.space.subdomain}: deactivated user #{email}/#{name}: #{response}"
+      Rails.logger.info "#{@team.space.subdomain}: deactivated user #{user['id']}: #{response}"
     else
-      Rails.logger.info "#{@team.space.subdomain}: cannot deactivate user #{email}/#{name} - not found"
+      Rails.logger.info "#{@team.space.subdomain}: cannot deactivate user #{user['id']} - not found"
     end
   end
 

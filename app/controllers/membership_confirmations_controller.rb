@@ -12,7 +12,7 @@ class MembershipConfirmationsController < ApplicationController
       MembershipInviteWorker.perform_async(@team.id, membership[:email], membership[:name])
     else
       if membership
-        Rails.logger.info "#{@space.subdomain}: skipped  #{membership[:name]}/#{membership[:id]} as it has no email."
+        Rails.logger.info "#{@space.subdomain}: skipped membership #{membership[:id]} as it has no email."
       else
         Rails.logger.info "#{@space.subdomain}: skipped #{params[:url]} as it was deleted."
       end
