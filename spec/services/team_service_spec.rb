@@ -12,7 +12,7 @@ RSpec.describe TeamService, '#invite' do
       .to receive(:perform_async)
       .with('space-1', 'Invited joe (joe@doe.com) to join Slack.')
 
-    TeamService.new(team).invite('joe@doe.com', 'joe')
+    TeamService.new(team).invite('joe@doe.com', 'joe', 'member_1')
   end
 
   it 'create an activity on error' do
@@ -23,6 +23,6 @@ RSpec.describe TeamService, '#invite' do
       .to receive(:perform_async)
       .with('space-1', 'Error inviting joe (joe@doe.com) to join Slack: already invited.', 'WARN')
 
-    TeamService.new(team).invite('joe@doe.com', 'joe')
+    TeamService.new(team).invite('joe@doe.com', 'joe', 'member_1')
   end
 end

@@ -8,7 +8,7 @@ class BulkInviteWorker
     memberships = api_client.get("https://#{space.subdomain}.cobot.me/api/memberships?attributes=name,email")
     memberships.each do |membership|
       if membership[:email].present?
-        TeamService.new(team).invite(membership[:email], membership[:name].to_s)
+        TeamService.new(team).invite(membership[:email], membership[:name].to_s, membership[:id])
       end
     end
   end
