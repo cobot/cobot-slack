@@ -13,7 +13,7 @@ gem 'omniauth-slack'
 gem 'cobot_client'
 gem 'sentry-raven'
 gem 'lograge'
-gem 'cobot_assets', '~> 0.0.9'
+gem 'cobot_assets', '~> 17.9.0'
 gem 'slack-api', '~> 1.5.0', require: 'slack'
 gem 'sidekiq'
 
