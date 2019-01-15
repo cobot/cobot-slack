@@ -24,4 +24,7 @@ class ApplicationController < ActionController::Base
     @api_client ||= CobotClient::ApiClient.new(access_token)
   end
 
+  def show_header
+    @show_header = true
+  end
 end
