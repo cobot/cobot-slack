@@ -35,5 +35,5 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.cobot_site = 'http://www.cobot.dev:3000'
+  config.cobot_site = 'http://www.cobot.localhost:3000'
 end
