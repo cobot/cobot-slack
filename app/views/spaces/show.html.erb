@@ -21,7 +21,7 @@
     <% else %>
       <p>This space has no Slack teams set up yet.</p>
     <% end %>
-    <p><%= link_to 'Add Team', [:new, @space, :team], class: 'btn btn--blue' %></p>
-    <p><%= link_to 'back', :spaces %></p>
+    <p><%= link_to 'Add Team', [:new, @space, :team], class: 'btn btn--small btn--dashed btn--padded btn--primary btn--stretch btn_add' %></p>
+    <p><%= link_to 'back', :spaces, class: 'link--back' %></p>
   </div>
 </div>
