@@ -1,11 +1,7 @@
 <div class="cb-section">
   <div class="cb-container">
     <h1>Connect <%= @space.name %> to Slack</h1>
-  </div>
-</div>
 
-<div class="cb-section">
-  <div class="cb-container">
     <div class="grid grid--gutters--huge grid--full tablet-grid--1of2">
       <div class="grid-cell">
         <div class="form-block form-block--wide">
@@ -19,7 +15,7 @@
               <%= f.label :slack_token, 'Slack Team Token' %>
               <%= f.text_field :slack_token, required: true, class: 'input--stretch' %><br>
               <span class="muted">
-                You can find your token on 
+                You can find your token on
                 <a href="https://api.slack.com/custom-integrations/legacy-tokens" target="_blank">api.slack.com</a>.
               </span>
             </p>
