@@ -3,15 +3,18 @@
     <h1><%= @space.name %></h1>
 
     <% if @space.teams.any? %>
-      <ul>
+      <ul class="admin-list">
         <% @space.teams.each do |team| %>
-          <li>
-            <p>
+          <li class="admin-item">
+            <div class="admin-item__title">
               <%= team.name %>
+            </div>
+            <div class="admin-item__controls">
               <%= link_to 'Remove', [@space, team], method: :delete,
-                class: 'btn btn-small',
+                class: 'btn btn--plain btn--small btn--primary btn_x',
                   data: {confirm: 'Are you sure you want to stop adding Cobot members to this team?'} %>
-            </p>
+
+            </div>
           </li>
         <% end %>
       </ul>
