@@ -6,10 +6,10 @@
       <ul>
         <% @space.teams.each do |team| %>
           <li>
-            <p class="f--clear">
+            <p>
               <%= team.name %>
               <%= link_to 'Remove', [@space, team], method: :delete,
-                class: 'btn btn-small f--right',
+                class: 'btn btn-small',
                   data: {confirm: 'Are you sure you want to stop adding Cobot members to this team?'} %>
             </p>
           </li>
