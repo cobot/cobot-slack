@@ -6,12 +6,10 @@
 
 <div class="cb-section">
   <div class="cb-container">
-    <p>This add-on will connects your coworking space on Cobot with your <a href="http://slack.com">slack.com</a> account.</p>
-
-    <p>New members on Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
+    <p>This add-on will connect your space on Cobot with your <a href="http://slack.com">slack.com</a> account. New members on Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
 
     <% if @spaces.any? %>
-      <p>Select the space you want to add to Slack:</p>
+      <p>Select the space you want to connect to Slack:</p>
       <ul class="admin-list">
         <% @spaces.each do |space| %>
           <li class="admin-item">
