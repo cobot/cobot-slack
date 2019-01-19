@@ -16,7 +16,7 @@
         <% @spaces.each do |space| %>
           <li>
             <p class="f--clear">
-              <%= link_to 'Manage existing teams', space, class: 'btn btn--blue btn--small f--right' %>
+              <%= link_to 'Manage Existing Teams', space, class: 'btn btn--blue btn--small f--right' %>
               <%= link_to space.name, [:new, space, :team] %>
             </p>
           </li>
