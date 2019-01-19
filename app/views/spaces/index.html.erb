@@ -6,19 +6,21 @@
 
 <div class="cb-section">
   <div class="cb-container">
-    <p>This add-on will connect your coworking space on Cobot with your <a href="http://slack.com">slack.com</a> account.</p>
+    <p>This add-on will connects your coworking space on Cobot with your <a href="http://slack.com">slack.com</a> account.</p>
 
     <p>New members on Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
 
     <% if @spaces.any? %>
       <p>Select the space you want to add to Slack:</p>
-      <ul>
+      <ul class="admin-list">
         <% @spaces.each do |space| %>
-          <li>
-            <p class="f--clear">
-              <%= link_to 'Manage Existing Teams', space, class: 'btn btn--blue btn--small f--right' %>
+          <li class="admin-item">
+            <div class="admin-item__title">
               <%= link_to space.name, [:new, space, :team] %>
-            </p>
+            </div>
+            <div class="admin-item__controls">
+              <%= link_to 'Manage Existing Teams', space, class: 'btn btn--plain btn--primary btn--small btn_gear' %>
+            </div>
           </li>
         <% end %>
       </ul>
