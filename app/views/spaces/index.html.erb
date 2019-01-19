@@ -10,6 +10,7 @@
         <% @spaces.each do |space| %>
           <li class="admin-item">
             <div class="admin-item__title">
+              <img src="<%= space_logo_url(space.subdomain) %>" width="42" height="42" class="mr3">
               <%= link_to space.name, [:new, space, :team] %>
             </div>
             <div class="admin-item__controls">
