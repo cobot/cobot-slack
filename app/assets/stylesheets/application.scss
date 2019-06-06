@@ -72,23 +72,3 @@
 @import "cobot_assets/utility/show-hide";
 @import "cobot_assets/utility/pointer-events";
 @import "cobot_assets/utility/min-widths";
-
-
-.form-hint {
-  font-size: 90%;
-  color: lighten($color-text, 30%);
-}
-
-
-.cb-integration-logo {
-  margin-left: 20px;
-  img {
-    width: 170px;
-  }
-}
-
-@include media-query-max($screen-mobile) {
-  .cb-logo img, .cb-integration-logo img {
-    width: 100px;
-  }
-}
