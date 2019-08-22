@@ -57,7 +57,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    cobot_assets (17.9.0)
+    cobot_assets (18.4.3)
     cobot_client (4.0.0)
       json (~> 2.0)
       oauth2 (~> 1.0)
@@ -272,7 +272,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
-  cobot_assets (~> 17.9.0)
+  cobot_assets (~> 18.4.3)
   cobot_client
   dotenv-rails
   font-awesome-sass!
