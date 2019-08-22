@@ -1,10 +1,9 @@
-<div class="cb-section">
+<div class="cb-section cb-section--padded bg--gray-4">
   <div class="cb-container">
-    <div class="grid grid--gutters--big grid--full tablet-grid--1of2 desktop-grid--1of2">
+    <div class="grid grid-center grid--gutters--huge grid--full tablet-grid--1of2">
       <div class="grid-cell">
-        <h2>Integrate Cobot with Slack</h2>
-        <p>This <a href="http://cobot.me/addons">add-on</a> connects your space’s Cobot account with your <a href="http://slack.com">slack.com</a> account. This means that new members who are added through Cobot will automatically be invited to join your Slack team, so you don't have to add them manually.</p>
-
+        <h2 class="f2 f1-ns mt2 measure">Integrate Cobot with Slack</h2>
+        <p class="mb4 measure">This <a href="http://cobot.me/addons">add-on</a> connects your space’s Cobot account with your <a href="http://slack.com">slack.com</a> account. This means that new members who are added through Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
 
         <p>Now that they have been added to your Slack channel, you have a communication point for everyone in your space to:</p>
         <ul>
@@ -14,11 +13,22 @@
           <li>Announce packages delivered to the space</li>
         </ul>
         <p>The sky is the limit!</p>
-        <p><%= link_to 'Get Started now', sign_in_path, class: 'btn btn--full btn--hl btn--biggest' %></p>
+        <p><%= link_to 'Get Started', sign_in_path, class: 'btn btn--full btn--hl btn--biggest' %></p>
       </div>
 
       <div class="grid-cell">
-        <h2>What is Slack?</h2>
+        <div class="bg--white shadow-cobot pa5 integration-logo__box">
+          <%= image_tag 'slack.svg', class:'w-100 mv4' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cb-section cb-section--padded">
+  <div class="cb-container">
+    <div class="measure-wide">
+      <div class="grid-cell">
+        <h3 class="f3 f2-ns">What is Slack?</h3>
         <p>
           <a href="http://slack.com">Slack</a> is arguably the best team communication application there is, used by companies around the world, including Cobot. It allows you to manage communication between team members and various online accounts in one application.
         </p>
@@ -39,7 +49,6 @@
           <div class="media__body">
             You can also use our <a href="http://blog.cobot.me/post/111166081512/cobot-now-connects-with-zapier-were-looking-for">beta Zapier integration</a> to deliver custom information from Cobot’s API directly to your Slack channel.
           </div>
-
         </div>
       </div>
     </div>

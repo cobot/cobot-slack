@@ -4,7 +4,8 @@ ruby '2.4.1'
 
 gem 'rails', '~>4.2.11'
 gem 'pg'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.7'
+gem 'font-awesome-sass', git: 'https://github.com/langalex/font-awesome-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'rspec-rails', group: [:development, :test]
@@ -13,7 +14,7 @@ gem 'omniauth-slack'
 gem 'cobot_client'
 gem 'sentry-raven'
 gem 'lograge'
-gem 'cobot_assets', '~> 0.0.9'
+gem 'cobot_assets', '~> 18.4.3'
 gem 'slack-api', '~> 1.5.0', require: 'slack'
 gem 'sidekiq'
 
