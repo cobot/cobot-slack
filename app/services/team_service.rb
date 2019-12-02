@@ -30,7 +30,7 @@ class TeamService
       response = slack_client.admin_set_inactive(user: user['id'])
       Rails.logger.info "#{@team.space.subdomain}: deactivated user #{user['id']} with membership_id #{membership_id}: #{response}"
     else
-      Rails.logger.info "#{@team.space.subdomain}: cannot deactivate user #{user['id']} with membership_id #{membership_id} - not found"
+      Rails.logger.info "#{@team.space.subdomain}: cannot deactivate user #{email} with membership_id #{membership_id} - not found"
     end
   end
 
