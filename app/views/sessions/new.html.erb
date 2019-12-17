@@ -1,0 +1,10 @@
+<p>If you are not redirected automatically, click the button.</p>
+<%= button_to '/auth/cobot',
+  id: 'log-in-button',
+  class: 'btn btn--full btn--primary' do %>
+  Log in
+<% end %>
+
+<script>
+  document.querySelector('#log-in-button').click();
+</script>

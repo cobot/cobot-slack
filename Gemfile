@@ -10,6 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'rspec-rails', group: [:development, :test]
 gem 'omniauth_cobot'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem 'omniauth-slack'
 gem 'cobot_client'
 gem 'sentry-raven'

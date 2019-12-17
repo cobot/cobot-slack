@@ -1,13 +1,11 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   skip_before_action :authenticate
   before_action :show_header
 
   def new
-    if logged_in?
-      redirect_to after_signin_path
-    else
-      redirect_to '/auth/cobot'
-    end
+    redirect_to after_signin_path if logged_in?
   end
 
   def create
@@ -28,9 +26,10 @@ class SessionsController < ApplicationController
     auth.extra.raw_info.admin_of.each do |admin|
       space = Space.where(subdomain: admin.space_subdomain).first ||
               Space.create!(subdomain: admin.space_subdomain,
-                name: admin.space_name,
-                access_token: space_access_token(
-                  auth.credentials.token, admin.space_subdomain))
+                            name: admin.space_name,
+                            access_token: space_access_token(
+                              auth.credentials.token, admin.space_subdomain
+                            ))
       user.admins.create space: space
     end
   end
