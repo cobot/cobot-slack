@@ -20,7 +20,7 @@ gem 'slack-api', '~> 1.5.0', require: 'slack'
 gem 'sidekiq'
 
 group :production do
-  gem 'puma'
+  gem 'puma', '~> 4.3.3'
   gem 'rails_12factor'
 end
 
