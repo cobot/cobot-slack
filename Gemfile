@@ -16,6 +16,7 @@ gem 'cobot_client'
 gem 'sentry-raven'
 gem 'lograge'
 gem 'cobot_assets', '~> 18.4.3'
+gem 'rake', '~>12.3.3'
 gem 'slack-api', '~> 1.5.0', require: 'slack'
 gem 'sidekiq'
 
