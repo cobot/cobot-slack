@@ -154,7 +154,7 @@ GEM
     public_suffix (2.0.5)
     puma (4.3.3)
       nio4r (~> 2.0)
-    rack (1.6.11)
+    rack (1.6.13)
     rack-protection (2.0.1)
       rack
     rack-test (0.6.3)
@@ -290,6 +290,7 @@ DEPENDENCIES
   omniauth_cobot
   pg
   puma (~> 4.3.3)
+  rack (~> 1.6.12)
   rails (~> 4.2.11)
   rails_12factor
   rake (~> 12.3.3)
