@@ -23,7 +23,7 @@ class TeamService
   end
 
   def deactivate(email, name, membership_id)
-    user = slack_client.users_list['members'].find do |u|
+    user = slack_client.users_list['members']&.find do |u|
       u['profile']['email'] == email || u['profile']['real_name'] == name
     end
     if user
