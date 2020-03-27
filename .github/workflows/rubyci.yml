@@ -1,0 +1,41 @@
+name: Ruby CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up postgres
+      uses: harmon758/postgresql-action@v1
+      with:
+        postgresql version: '10.10'
+        postgresql user: test
+        postgresql password: test
+    - name: Set up Redis
+      uses: zhulik/redis-action@v1.0.0
+      with:
+        redis version: '5'
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Install deps
+      run: sudo apt-get install -y libpq-dev
+    - name: Install Bundler/gems
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+    - name: Setup DB
+      run: |
+        cp config/database.yml.github-ci config/database.yml
+        bundle exec rake db:setup
+    - name: Run Tests
+      run: bundle exec rake
