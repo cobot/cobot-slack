@@ -47,6 +47,8 @@ jobs:
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
+    - name: Install yarn packages
+      run: yarn install --check-files
     - name: Setup DB
       run: |
         cp config/database.yml.github-ci config/database.yml
