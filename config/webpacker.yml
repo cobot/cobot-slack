@@ -94,3 +94,6 @@ production:
 
   # Cache manifest.json for performance
   cache_manifest: true
+
+  # true breaks heroku deploy
+  check_yarn_integrity: false
