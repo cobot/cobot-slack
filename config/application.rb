@@ -1,4 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('boot', __dir__)
 
 require 'rails/all'
 
@@ -11,6 +13,7 @@ module CobotSlack
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.load_defaults 5.0
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -23,7 +26,7 @@ module CobotSlack
     config.action_view.field_error_proc = proc do |html, instance|
       add_error_class = lambda do |html|
         if html.include?('class="')
-          html.sub('class="', "class=\"error ")
+          html.sub('class="', 'class="error ')
         else
           html.sub(/<(\w+)/, '<\1 class="error"')
         end

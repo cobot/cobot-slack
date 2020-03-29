@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@rails/ujs": "^6.0.2-2",
+    "@rails/webpacker": "5.0.1",
+    "cobot_assets": "https://github.com/upstream/cobot_assets.git",
+    "font-awesome": "4.7.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.3"
+  }
+}

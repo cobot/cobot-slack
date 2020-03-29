@@ -1,5 +1,0 @@
-test:
-  adapter: postgresql
-  pool: 5
-  timeout: 5000
-  database: cobot_slack_test

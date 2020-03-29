@@ -1,0 +1,62 @@
+$cobot-assets-images-path: '~cobot_assets/images';
+$open-sans-font-path: '~cobot_assets/fonts/';
+
+
+@import "~cobot_assets/scss/font_awesome_imports";
+
+@import "~cobot_assets/scss/abstracts/colors-fixed";
+@import "~cobot_assets/scss/abstracts/colors";
+@import "~cobot_assets/scss/abstracts/sizes";
+@import "~cobot_assets/scss/abstracts/fonts";
+@import "~cobot_assets/scss/abstracts/borders";
+@import "~cobot_assets/scss/abstracts/transitions";
+@import "~cobot_assets/scss/abstracts/functions";
+@import "~cobot_assets/scss/abstracts/mixins";
+@import "~cobot_assets/scss/abstracts/breakpoints";
+@import "~cobot_assets/scss/abstracts/settings-grid";
+@import "~cobot_assets/scss/abstracts/settings-layout";
+@import "~cobot_assets/scss/abstracts/settings-forms";
+
+@import "~cobot_assets/scss/base/reset";
+@import "~cobot_assets/scss/base/typography";
+
+@import "~cobot_assets/scss/layout/layout";
+@import "~cobot_assets/scss/layout/grid";
+@import "~cobot_assets/scss/layout/logo";
+@import "~cobot_assets/scss/layout/nav";
+
+@import "~cobot_assets/scss/components/images";
+@import "~cobot_assets/scss/components/links";
+@import "~cobot_assets/scss/components/forms";
+@import "~cobot_assets/scss/components/btn";
+@import "~cobot_assets/scss/components/btn-tabs";
+@import "~cobot_assets/scss/components/tags";
+@import "~cobot_assets/scss/components/facebox";
+@import "~cobot_assets/scss/components/lists";
+@import "~cobot_assets/scss/components/mediaobject";
+@import "~cobot_assets/scss/components/tables";
+@import "~cobot_assets/scss/components/sample-section";
+@import "~cobot_assets/scss/components/pagination";
+@import "~cobot_assets/scss/components/power-select";
+@import "~cobot_assets/scss/components/top-notice";
+@import "~cobot_assets/scss/components/admin-list";
+@import "~cobot_assets/scss/components/space-box";
+@import "~cobot_assets/scss/components/pikaday";
+@import "~cobot_assets/scss/components/tipsy";
+@import "~cobot_assets/scss/components/avatar";
+@import "~cobot_assets/scss/components/checked-in-pulse";
+@import "~cobot_assets/scss/components/color-computation-test";
+
+@import "~cobot_assets/scss/utility/helpers";
+@import "~cobot_assets/scss/utility/fonts";
+@import "~cobot_assets/scss/utility/text-align";
+@import "~cobot_assets/scss/utility/text-color";
+@import "~cobot_assets/scss/utility/hover-text-color";
+@import "~cobot_assets/scss/utility/bg-color";
+@import "~cobot_assets/scss/utility/hover-bg-color";
+@import "~cobot_assets/scss/utility/border-color";
+@import "~cobot_assets/scss/utility/hover-border-color";
+@import "~cobot_assets/scss/utility/tachyons-cobot";
+@import "~cobot_assets/scss/utility/show-hide";
+@import "~cobot_assets/scss/utility/pointer-events";
+@import "~cobot_assets/scss/utility/min-widths";
