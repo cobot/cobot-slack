@@ -15,8 +15,9 @@
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
-
 require.context('cobot_assets/images')
 import '../src/scss/application.scss';
 require("@rails/ujs").start()
+
+import customizeColors from 'cobot_assets/src/customize-colors';
+customizeColors({});
