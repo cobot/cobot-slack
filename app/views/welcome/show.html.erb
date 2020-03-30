@@ -3,52 +3,32 @@
     <div class="grid grid-center grid--gutters--huge grid--full tablet-grid--1of2">
       <div class="grid-cell">
         <h2 class="f2 f1-ns mt2 measure">Integrate Cobot with Slack</h2>
-        <p class="mb4 measure">This <a href="http://cobot.me/addons">add-on</a> connects your space’s Cobot account with your <a href="http://slack.com">slack.com</a> account. This means that new members who are added through Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
-
-        <p>Now that they have been added to your Slack channel, you have a communication point for everyone in your space to:</p>
+        <p class="mb4 measure" style="text-decoration: line-through">This <a href="http://cobot.me/addons">add-on</a> connects your space’s Cobot account with your <a href="http://slack.com">slack.com</a> account. This means that new members who are added through Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
+        <p class="mb4 measure">
+          Slack has decided that inviting users is now an Enterprise-only feature.
+          This means this add-on will stop working in May 2020.
+        </p>
+        <p>
+          After the app stops working,
+          we recommend that you
+        </p>
         <ul>
-          <li>Talk about what is happening in the space</li>
-          <li>Post events</li>
-          <li>Welcome new members</li>
-          <li>Announce packages delivered to the space</li>
-        </ul>
-        <p>The sky is the limit!</p>
-        <p><%= link_to 'Get Started', sign_in_path, class: 'btn btn--full btn--hl btn--biggest' %></p>
+          <li><a href="https://slack.com/intl/en-de/help/articles/201330256-Invite-new-members-to-your-workspace?eu_nc=1#share-an-invite-link" target="_blank">generate an invite link</a></li>
+          <li>
+            add the invite link to your <a href="https://www.cobot.me/en/support/guides/plans-space-access/adding-membership-plans#messages">welcome message</a> or
+            <a href="https://www.cobot.me/en/support/guides/the-basics/customization#emails">membership confirmation email</a>
+          </li>
+        </p>
+
+        <p>
+          <%= link_to 'Log in',
+            sign_in_path,
+            class: 'btn btn--full btn--primary' %> to manage existing integrations.</p>
       </div>
 
       <div class="grid-cell">
         <div class="bg--white shadow-cobot pa5 integration-logo__box">
           <%= image_pack_tag 'slack.svg', class:'w-100 mv4' %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="cb-section cb-section--padded">
-  <div class="cb-container">
-    <div class="measure-wide">
-      <div class="grid-cell">
-        <h3 class="f3 f2-ns">What is Slack?</h3>
-        <p>
-          <a href="http://slack.com">Slack</a> is arguably the best team communication application there is, used by companies around the world, including Cobot. It allows you to manage communication between team members and various online accounts in one application.
-        </p>
-        <p>It offers:</p>
-        <ul>
-          <li>chat rooms and private messaging</li>
-          <li>drag&drop file sharing</li>
-          <li>emojis 😀</li>
-          <li>full-text search & archiving</li>
-          <li>mobile apps</li>
-          <li><a href="https://slack.com/integrations">integrations</a> with services such as Google Docs, Dropbox, email, Google calendar, Trello, etc.</li>
-        </ul>
-        <p>Their <a href="https://slack.com/pricing">free account</a> offers unlimited members. The only limits are on number of file uploads, 10 service integrations, and 10k messages saved in the message archive.</p>
-        <div class="media">
-          <div class="media__figure">
-            <%= image_pack_tag 'zapier.svg', width: 50, style: 'display: inline' %>
-          </div>
-          <div class="media__body">
-            You can also use our <a href="http://blog.cobot.me/post/111166081512/cobot-now-connects-with-zapier-were-looking-for">beta Zapier integration</a> to deliver custom information from Cobot’s API directly to your Slack channel.
-          </div>
         </div>
       </div>
     </div>
