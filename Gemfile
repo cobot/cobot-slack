@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.5'
 
-gem 'railties', '~>5.2'
+gem 'railties', '~>5.2.4.3'
 gem 'activerecord'
 gem 'actionpack'
 gem 'bootsnap'
