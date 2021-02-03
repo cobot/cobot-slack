@@ -1,4 +1,6 @@
-class AddAccessTokenToSpaces < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class AddAccessTokenToSpaces < ActiveRecord::Migration[5.2]
   def change
     add_column :spaces, :access_token, :string
     Space.reset_column_information

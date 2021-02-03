@@ -1,7 +1,7 @@
 class SpacesController < ApplicationController
   before_action :show_header, only: :index
   def index
-    @spaces = current_user.spaces
+    @spaces = current_user.spaces.includes(:teams)
   end
 
   def show

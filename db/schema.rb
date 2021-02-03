@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,38 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112145931) do
+ActiveRecord::Schema.define(version: 2017_01_12_145931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "admins", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "space_id"
-    t.uuid     "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "admins", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "space_id"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "spaces", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "subdomain"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "access_token"
+  create_table "spaces", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "subdomain"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "access_token"
   end
 
-  create_table "teams", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slack_token"
     t.string "slack_url"
-    t.uuid   "space_id"
+    t.uuid "space_id"
   end
 
-  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "cobot_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cobot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

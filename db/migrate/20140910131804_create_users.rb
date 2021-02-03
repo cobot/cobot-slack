@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration
+class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     enable_extension 'uuid-ossp'
     create_table :users, id: :uuid do |t|

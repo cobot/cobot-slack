@@ -2,7 +2,7 @@
   <div class="cb-container mw6">
     <h1>Slack Integration</h1>
 
-    <p>This add-on will connect your space on Cobot with your <a href="http://slack.com">slack.com</a> account. New members on Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
+    <p>This add-on is only available for Cobot accounts that set up the integration prior to May 2020. It will continue to connect your space on Cobot with your slack.com account. New members on Cobot will automatically be invited to join your Slack team, so you don’t have to add them manually.</p>
 
     <% if @spaces.any? %>
       <p>Select the space you want to connect to Slack:</p>
@@ -11,10 +11,10 @@
           <li class="admin-item">
             <div class="admin-item__title">
               <img src="<%= space_logo_url(space.subdomain) %>" width="42" height="42" class="mr3">
-              <%= link_to space.name, [:new, space, :team] %>
+              <%= space.name %>
             </div>
             <div class="admin-item__controls">
-              <%= link_to 'Manage Existing Teams', space, class: 'btn btn--plain btn--primary btn--small btn_gear' %>
+              <%= link_to_if space.teams.any?, 'Manage Existing Teams', space, class: 'btn btn--plain btn--primary btn--small btn_gear' %>
             </div>
           </li>
         <% end %>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'managing slack teams' do
@@ -5,7 +7,7 @@ describe 'managing slack teams' do
     stub_request(:post, 'https://co-up.cobot.me/api/activities')
       .to_return(body: '{}')
   end
-  
+
   context 'when adding a team' do
     before(:each) do
       stub_request(:post, 'https://co-up.cobot.me/api/subscriptions')
@@ -13,9 +15,9 @@ describe 'managing slack teams' do
       stub_request(:get, 'https://co-up.cobot.me/api/memberships')
         .to_return(body: [].to_json)
       stub_request(:post, 'https://co-up.slack.com/api/auth.test')
-        .to_return(body: {ok: true}.to_json)
+        .to_return(body: { ok: true }.to_json)
       stub_request(:post, 'https://co-up.slack.com/api/users.admin.invite')
-        .to_return(body: {ok: true}.to_json)
+        .to_return(body: { ok: true }.to_json)
       @space = log_in 'co.up', access_token: '12345'
     end
 
@@ -23,26 +25,28 @@ describe 'managing slack teams' do
       add_team name: 'space members', remove_canceled_members: true
 
       expect(page).to have_content('space members')
-      %w(confirmed_membership connected_user).each do |event|
+      %w[confirmed_membership connected_user].each do |event|
         expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions')
           .with(
-            headers: {'Authorization' => 'Bearer space-token-12345'},
-            body: {event: event,
-              callback_url: space_team_membership_confirmation_url(@space, Team.last)}.to_json))
+            headers: { 'Authorization' => 'Bearer space-token-12345' },
+            body: { event: event,
+                    callback_url: space_team_membership_confirmation_url(@space, Team.last) }.to_json
+          ))
           .to have_been_made
       end
       expect(a_request(:post, 'https://co-up.cobot.me/api/subscriptions')
         .with(
-          headers: {'Authorization' => 'Bearer space-token-12345'},
-          body: {event: 'canceled_membership',
-            callback_url: space_team_membership_cancelation_url(@space, Team.last)}.to_json))
+          headers: { 'Authorization' => 'Bearer space-token-12345' },
+          body: { event: 'canceled_membership',
+                  callback_url: space_team_membership_cancelation_url(@space, Team.last) }.to_json
+        ))
         .to have_been_made
     end
 
     it "renders an error if we can't connect to the slack api" do
       stub_request(:post, 'https://co-up.slack.com/api/auth.test')
-        .with(body: {token: 'slck-123'})
-        .to_return(body: {ok: false, error: 'token invalid'}.to_json)
+        .with(body: { token: 'slck-123' })
+        .to_return(body: { ok: false, error: 'token invalid' }.to_json)
 
       add_team name: 'space members', token: 'slck-123'
       expect(page).to have_content('token invalid')
@@ -61,8 +65,8 @@ describe 'managing slack teams' do
 
     it 'invites existing members' do
       stub_request(:get, 'https://co-up.cobot.me/api/memberships?attributes=name,email')
-        .with(headers: {'Authorization' => 'Bearer space-token-12345'})
-        .to_return(body: [{name: 'joe doe', email: 'joe@doe.com'}].to_json)
+        .with(headers: { 'Authorization' => 'Bearer space-token-12345' })
+        .to_return(body: [{ name: 'joe doe', email: 'joe@doe.com' }].to_json)
 
       add_team add_existing_members: true, token: 'slack-123'
 
@@ -84,7 +88,7 @@ describe 'managing slack teams' do
   end
 
   def add_team(name: 'team', token: 't123', add_existing_members: false, remove_canceled_members: false)
-    click_link 'co.up'
+    visit new_space_team_url(Space.last)
     fill_in 'Name', with: name
     fill_in 'Slack Team Token', with: token
     fill_in 'Slack Team URL', with: 'co-up'
